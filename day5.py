@@ -13,7 +13,7 @@ def read_input(filename):
         return lines
 
 
-def find_mapping(input_ranges, search) -> int:
+def find_mapping_parta_old(input_ranges, search) -> int:
     idx = 0
     while idx < len(input_ranges) and search < input_ranges[idx][0][0]:
         idx += 1
@@ -98,7 +98,6 @@ def intersect_mappings(
         assert idx < len(new_ranges)
         if search.upper > new_ranges[idx].source.upper:
             to_process.append(Range(new_ranges[idx].source.upper, search.upper))
-            # map [target_lower, range_upper]
             results.append(
                 Range(
                     search.lower
@@ -152,13 +151,13 @@ def test_intersect_mapping():
 def test_mapping():
     maps = [[(0, 15), (39, 54)], [(15, 52), (0, 37)], [(52, 54), (37, 39)]]
     # maps = [[(50, 98), (52, 100)], [(98, 100), (50, 52)]]
-    assert find_mapping(maps, 81) == 81
-    assert find_mapping(maps, 14) == 53
-    assert find_mapping(maps, 57) == 57
-    assert find_mapping(maps, 13) == 52
+    assert find_mapping_parta_old(maps, 81) == 81
+    assert find_mapping_parta_old(maps, 14) == 53
+    assert find_mapping_parta_old(maps, 57) == 57
+    assert find_mapping_parta_old(maps, 13) == 52
 
     maps = [[(18, 25), (88, 95)], [(25, 95), (18, 88)]]
-    assert find_mapping(maps, 81) == 74
+    assert find_mapping_parta_old(maps, 81) == 74
 
 
 test_mapping()
@@ -206,7 +205,7 @@ def run_part_a(lines):
         mappings = [mapping]
         for source in ordering:
             # logging.debug(f"From {source}:{mapping}", end=" ")
-            mapping = find_mapping(map_ranges[source], mapping)
+            mapping = find_mapping_parta_old(map_ranges[source], mapping)
             mappings.append(mapping)
             # logging.debug(f"to {mapping}")
         logging.debug(f"Seed: {seed}: Location: {mapping}")
