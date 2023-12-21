@@ -46,4 +46,6 @@ def run_part_b(lines):
 
 print(f"Part A: {run_part_a(None)}")
 
-print(f"Part B: {run_part_b(None)}")
+test_part_b()
+read_input('day8.in')
+run_part_b(read_input('day8.in'))}")
