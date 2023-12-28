@@ -102,7 +102,6 @@ def print_graph(positions: [Position], grid):
 
 
 def get_loop_length(s_loc: Position, grid):
-    # Start a depth first on any direction until you come back to S
     nebs = get_interesting_neighs(s_loc, grid)
     print(s_loc)
     assert len(nebs) == 2
@@ -128,6 +127,7 @@ def get_loop_length(s_loc: Position, grid):
             s_sub = "7"
     logging.debug(f"With {nebs}, S -> {s_sub}")
 
+    # Start a depth first on both sides till they intersect
     loop = set([s_loc])
     steps = 0
     curr: [Position] = nebs
